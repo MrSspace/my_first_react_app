@@ -1,0 +1,27 @@
+:root{
+    --button-color: rgb(255, 146, 29, 1);
+    --background-shadow: rgb(15, 73, 21, 0.5);
+    --transition: rgba(12, 186, 26, 0.764);
+}
+
+.create-todo-button{
+    margin: 0;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 15px;
+    left: calc(50% - 25px);
+    border-radius: 25px;
+    border: none;
+    box-shadow: 0px 5px 5px var(--background-shadow);
+    background-color: var(--button-color);
+    font-size: 30px;
+    font: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.create-todo-button:hover{
+    background-color: var(--transition);
+}

@@ -1,0 +1,21 @@
+:root{
+    --orange-head: rgb(255, 146, 29, 1);
+    --mid-coffe: rgb(76, 0, 0);
+    --withe-title: #FFFF;
+    --bg: linear-gradient(var(--mid-coffe),var(--orange-head));
+}
+
+.TodoCounter{
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    height: 200px;
+    justify-content: center;
+    background: var(--bg);
+    border-radius: 20px 20px 0 0;
+}
+
+h2{
+    color: var(--withe-title);
+    font-size: 25px;
+}
