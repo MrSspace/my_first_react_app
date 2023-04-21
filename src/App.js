@@ -29,6 +29,18 @@ function App() {
     });
   }
 
+  const toogleCompleteTodos = (text) => {
+    const index = todos.findIndex(todo => todo.text === text);
+    const modifiedTodos = [...todos];
+    modifiedTodos[index].completed = (modifiedTodos[index].completed ? false : true);
+    setTodos(modifiedTodos);
+  }
+
+  const deleteTodo = (text) => {
+    const modifiedTodos = todos.filter(todo=>todo.text !== text);
+    setTodos(modifiedTodos);
+  }
+
   return (
     <React.Fragment>
       <div className="main-container">
@@ -46,6 +58,8 @@ function App() {
               key={todo.id} 
               text={todo.text}
               completed={todo.completed}
+              onComplete={() => toogleCompleteTodos(todo.text)}
+              onDelete={() => deleteTodo(todo.text)}
             />
           ))}
         </TodoList>
