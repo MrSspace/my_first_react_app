@@ -7,28 +7,44 @@ import { AppUI } from "./AppUI";
 //   {id: 3, text: 'Estudiar NestJs', completed: false},
 // ];
 
+
+//Custom React Hook : useLocalStorage
+//Inicia Custom hook
+
+function useLocalStorage(itemName, initialValue){
+  
+  const localStorageItem = localStorage.getItem(itemName, initialValue);
+  let parsedItem;
+
+  if(!localStorageItem){
+    localStorage.setItem(itemName,JSON.stringify(initialValue));
+    parsedItem = initialValue;
+  } else {
+    parsedItem = JSON.parse(localStorageItem);
+  };
+
+  const [item, setItem] = React.useState(parsedItem);
+
+  const saveItem = (newItem) => {
+    const strItem = JSON.stringify(newItem);
+    localStorage.setItem(itemName, strItem);
+    setItem(newItem);
+  };
+
+  return [item, saveItem];
+  
+}
+
+//Termina Custom hook
+
 function App() {
 
   const TODOS_IN_STORAGE = {
     V1 : 'TODOS_V1',
   };
+
+  const [todos, saveTodos]  = useLocalStorage(TODOS_IN_STORAGE.V1, []);
   
-  const localStorageTodos = localStorage.getItem(TODOS_IN_STORAGE.V1);
-  let parsedTodos;
-  if(!localStorageTodos){
-    localStorage.setItem(TODOS_IN_STORAGE.V1,JSON.stringify([]));
-    parsedTodos = [];
-  } else {
-    parsedTodos = JSON.parse(localStorageTodos);
-  }
-
-  const saveTodos = (newTodos) => {
-    const strTodos = JSON.stringify(newTodos);
-    localStorage.setItem(TODOS_IN_STORAGE.V1, strTodos);
-    setTodos(newTodos);
-  };
-
-  const [todos, setTodos] = React.useState(parsedTodos);
   const [searchValue, setSearchValue] = React.useState('');
   const completedTodos = todos.filter(todo => todo.completed).length;
   const totalTodos = todos.length;
